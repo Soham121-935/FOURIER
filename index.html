@@ -1,0 +1,1375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fourier Domain Analysis — Complete Study Guide</title>
+  <meta name="description" content="Interactive Fourier Domain Analysis study guide with step-by-step solutions for EFS, TFS, and Fourier Transform problems.">
+
+  <!-- KaTeX -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="chatbot.css">
+</head>
+<body>
+
+<div class="app">
+
+  <!-- ═══ SIDEBAR ═══ -->
+  <button class="menu-toggle" aria-label="Open menu">☰</button>
+  <div class="sidebar-overlay"></div>
+
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <a class="sidebar-logo" href="#" onclick="showQuestion('q0');return false;">
+        <span class="icon">∑</span>
+        <div>
+          <div class="brand">Fourier Guide</div>
+          <div class="sub">Unit 4 · Complete Solutions</div>
+        </div>
+      </a>
+    </div>
+
+    <div class="sidebar-search">
+      <div class="search-wrapper">
+        <input type="text" id="searchInput" class="search-input" placeholder="Search questions…" autocomplete="off">
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">Overview</div>
+      <a class="nav-item active" data-q="q0" data-keywords="summary reference formulas">
+        <span class="label">📚 Quick Reference</span>
+      </a>
+
+      <div class="nav-section-label">Fourier Series</div>
+      <a class="nav-item" data-q="q1" data-keywords="cos cosine exponential efs lobe">
+        <span class="label">Q1 · cos(t) Lobes</span>
+        <span class="nav-badge efs">EFS</span>
+      </a>
+      <a class="nav-item" data-q="q2" data-keywords="rectified sine full wave tfs">
+        <span class="label">Q2/10 · Rectified Sine</span>
+        <span class="nav-badge tfs">TFS</span>
+      </a>
+      <a class="nav-item" data-q="q3" data-keywords="square wave periodic tfs">
+        <span class="label">Q3 · Square Wave</span>
+        <span class="nav-badge tfs">TFS</span>
+      </a>
+      <a class="nav-item" data-q="q7" data-keywords="methods comparison trigonometric exponential theory">
+        <span class="label">Q7 · FS Methods</span>
+        <span class="nav-badge theory">THY</span>
+      </a>
+      <a class="nav-item" data-q="q9" data-keywords="triangle triangular wave efs tfs">
+        <span class="label">Q9/11 · Triangle Wave</span>
+        <span class="nav-badge efs">EFS</span>
+      </a>
+
+      <div class="nav-section-label">Fourier Transform</div>
+      <a class="nav-item" data-q="q4" data-keywords="exponential decay causal one-sided e^-at u(t)">
+        <span class="label">Q4/13 · e⁻ᵃᵗu(t)</span>
+        <span class="nav-badge ft">FT</span>
+      </a>
+      <a class="nav-item" data-q="q5" data-keywords="double-sided exponential bilateral e^-|t|">
+        <span class="label">Q5/14/17 · e⁻|ᵗ|</span>
+        <span class="nav-badge ft">FT</span>
+      </a>
+      <a class="nav-item" data-q="q6" data-keywords="cosine cos omega delta impulse">
+        <span class="label">Q6/16 · cos(Ω₀t)</span>
+        <span class="nav-badge ft">FT</span>
+      </a>
+      <a class="nav-item" data-q="q8" data-keywords="gate rectangular pulse sinc">
+        <span class="label">Q8/15 · Gate / Rect</span>
+        <span class="nav-badge ft">FT</span>
+      </a>
+
+      <div class="nav-section-label">Theory</div>
+      <a class="nav-item" data-q="q12" data-keywords="properties linearity time shift frequency shift convolution parseval duality">
+        <span class="label">Q12 · FT Properties</span>
+        <span class="nav-badge theory">THY</span>
+      </a>
+    </nav>
+  </aside>
+
+  <!-- ═══ MAIN CONTENT ═══ -->
+  <main class="main">
+    <div class="progress-bar"><div class="fill"></div></div>
+    <div class="content-wrapper">
+
+      <!-- ════════════════════════════════════════
+           Q0 — SUMMARY / QUICK REFERENCE
+           ════════════════════════════════════════ -->
+      <div id="q0" class="question-section active">
+        <div class="page-header">
+          <div class="page-tag summary">📚 Overview</div>
+          <h1 class="page-title">Quick Reference</h1>
+          <p class="page-subtitle">Every key result at a glance. Click any card to jump to the full solution.</p>
+        </div>
+
+        <!-- Question Index Cards -->
+        <div class="card">
+          <div class="card-label"><span class="dot" style="background:var(--accent)"></span> Question Index</div>
+          <div class="summary-grid">
+            <div class="summary-card" onclick="showQuestion('q1')">
+              <div class="q-num">Question 1</div>
+              <div class="q-title">cos(t) · Full-Wave Lobes</div>
+              <div class="q-formula">C_k = 2(−1)^k / π(1−4k²)</div>
+              <span class="nav-badge efs">EFS</span>
+            </div>
+            <div class="summary-card" onclick="showQuestion('q2')">
+              <div class="q-num">Question 2 / 10</div>
+              <div class="q-title">Full-Wave Rectified Sine</div>
+              <div class="q-formula">aₙ = −4A / π(4n²−1)</div>
+              <span class="nav-badge tfs">TFS</span>
+            </div>
+            <div class="summary-card" onclick="showQuestion('q3')">
+              <div class="q-num">Question 3</div>
+              <div class="q-title">Periodic Square Wave</div>
+              <div class="q-formula">x(t) = (4/π) Σ sin(nπt/2)/n</div>
+              <span class="nav-badge tfs">TFS</span>
+            </div>
+            <div class="summary-card" onclick="showQuestion('q4')">
+              <div class="q-num">Question 4 / 13</div>
+              <div class="q-title">One-Sided Exponential</div>
+              <div class="q-formula">X(ω) = 1 / (a + jω)</div>
+              <span class="nav-badge ft">FT</span>
+            </div>
+            <div class="summary-card" onclick="showQuestion('q5')">
+              <div class="q-num">Question 5 / 14 / 17</div>
+              <div class="q-title">Double-Sided Exponential</div>
+              <div class="q-formula">X(ω) = 2a / (a² + ω²)</div>
+              <span class="nav-badge ft">FT</span>
+            </div>
+            <div class="summary-card" onclick="showQuestion('q6')">
+              <div class="q-num">Question 6 / 16</div>
+              <div class="q-title">cos(Ω₀t) Transform</div>
+              <div class="q-formula">X(ω) = π[δ(ω−Ω₀)+δ(ω+Ω₀)]</div>
+              <span class="nav-badge ft">FT</span>
+            </div>
+            <div class="summary-card" onclick="showQuestion('q7')">
+              <div class="q-num">Question 7</div>
+              <div class="q-title">TFS vs EFS Methods</div>
+              <div class="q-formula">Theory & Comparison</div>
+              <span class="nav-badge theory">THY</span>
+            </div>
+            <div class="summary-card" onclick="showQuestion('q8')">
+              <div class="q-num">Question 8 / 15</div>
+              <div class="q-title">Gate / Rect Pulse</div>
+              <div class="q-formula">X(ω) = τ sinc(ωτ/2)</div>
+              <span class="nav-badge ft">FT</span>
+            </div>
+            <div class="summary-card" onclick="showQuestion('q9')">
+              <div class="q-num">Question 9 / 11</div>
+              <div class="q-title">Triangular Wave</div>
+              <div class="q-formula">C_k = [(−1)^k − 1] / k²π²</div>
+              <span class="nav-badge efs">EFS</span>
+            </div>
+            <div class="summary-card" onclick="showQuestion('q12')">
+              <div class="q-num">Question 12</div>
+              <div class="q-title">FT Properties</div>
+              <div class="q-formula">12 Essential Properties</div>
+              <span class="nav-badge theory">THY</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Essential Formulas -->
+        <div class="card formula">
+          <div class="card-label"><span class="dot"></span> Trigonometric Fourier Series</div>
+          <div class="math-block">
+            $$ x(t) = a_0 + \sum_{n=1}^{\infty}\left[a_n\cos(n\omega_0 t) + b_n\sin(n\omega_0 t)\right] $$
+            $$ a_0 = \frac{1}{T}\int_0^T x(t)\,dt \qquad a_n = \frac{2}{T}\int_0^T x(t)\cos(n\omega_0 t)\,dt \qquad b_n = \frac{2}{T}\int_0^T x(t)\sin(n\omega_0 t)\,dt $$
+          </div>
+        </div>
+
+        <div class="card formula">
+          <div class="card-label"><span class="dot"></span> Exponential Fourier Series</div>
+          <div class="math-block">
+            $$ x(t) = \sum_{k=-\infty}^{\infty} C_k \, e^{jk\omega_0 t} \qquad\qquad C_k = \frac{1}{T}\int_0^T x(t)\,e^{-jk\omega_0 t}\,dt $$
+            $$ C_0 = a_0, \quad C_k = \tfrac{a_k - jb_k}{2}\;(k>0), \quad C_{-k} = C_k^* $$
+          </div>
+        </div>
+
+        <div class="card formula">
+          <div class="card-label"><span class="dot"></span> Fourier Transform Pair</div>
+          <div class="math-block">
+            $$ X(\omega) = \int_{-\infty}^{\infty} x(t)\,e^{-j\omega t}\,dt \qquad\qquad x(t) = \frac{1}{2\pi}\int_{-\infty}^{\infty} X(\omega)\,e^{j\omega t}\,d\omega $$
+          </div>
+        </div>
+
+        <!-- Symmetry Cheatsheet -->
+        <div class="card approach">
+          <div class="card-label"><span class="dot"></span> Symmetry Shortcuts — Save Time in Exams</div>
+          <table class="data-table">
+            <thead><tr><th>Symmetry</th><th>Condition</th><th>What You Can Skip</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Even function</strong></td><td>\(x(-t)=x(t)\)</td><td>\(b_n=0\) — no sine terms, only cosines</td></tr>
+              <tr><td><strong>Odd function</strong></td><td>\(x(-t)=-x(t)\)</td><td>\(a_0=0,\; a_n=0\) — only sine terms</td></tr>
+              <tr><td><strong>Half-wave odd</strong></td><td>\(x(t+T/2)=-x(t)\)</td><td>Only odd harmonics survive (\(n=1,3,5,\ldots\))</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Identities -->
+        <div class="card formula">
+          <div class="card-label"><span class="dot"></span> Identities You'll Use Constantly</div>
+          <div class="math-block">
+            $$ e^{j\theta} = \cos\theta + j\sin\theta $$
+            $$ \cos\theta = \frac{e^{j\theta}+e^{-j\theta}}{2} \qquad \sin\theta = \frac{e^{j\theta}-e^{-j\theta}}{2j} $$
+            $$ \sin(n\pi) = 0 \qquad \cos(n\pi) = (-1)^n \qquad \text{sinc}(x) = \frac{\sin x}{x},\;\text{sinc}(0)=1 $$
+          </div>
+        </div>
+
+        <!-- Exam Tips -->
+        <div class="card tip">
+          <div class="card-label"><span class="dot"></span> Exam Strategy</div>
+          <p style="margin-bottom:12px;color:var(--text-1);font-weight:600;">For 8-mark questions:</p>
+          <ul class="check-list">
+            <li>Draw the signal clearly with labeled axes</li>
+            <li>Identify period \(T\) and frequency \(\omega_0\) first</li>
+            <li>Check symmetry — it can halve your work</li>
+            <li>Write all formulas before calculating</li>
+            <li>Show 3-4 key steps, then box the final answer</li>
+          </ul>
+          <p style="margin:16px 0 12px;color:var(--text-1);font-weight:600;">For 16-mark questions, also:</p>
+          <ul class="check-list">
+            <li>Derive both magnitude and phase spectra</li>
+            <li>Sketch spectra with axes labeled</li>
+            <li>Calculate numerical values for first 3 terms</li>
+            <li>Mention physical meaning / applications</li>
+          </ul>
+        </div>
+      </div>
+
+
+      <!-- ════════════════════════════════════════
+           Q1 — cos(t) EFS
+           ════════════════════════════════════════ -->
+      <div id="q1" class="question-section">
+        <div class="page-header">
+          <div class="page-tag efs">Exponential Fourier Series</div>
+          <h1 class="page-title">Q1 — EFS of cos(t) Lobes</h1>
+          <p class="page-subtitle">Find the Exponential Fourier Series for \(x(t)=\cos(t)\) repeating with period \(T=\pi\).</p>
+        </div>
+
+        <div class="card given">
+          <div class="card-label"><span class="dot"></span> Given Information</div>
+          <p>\(x(t) = \cos(t)\) for \(-\pi/2 < t < \pi/2\), repeating as full-wave cosine lobes.</p>
+          <div class="signal-diagram">
+  1 │    ╱╲        ╱╲        ╱╲
+    │   ╱  ╲      ╱  ╲      ╱  ╲
+    │  ╱    ╲    ╱    ╲    ╱    ╲
+    │ ╱      ╲  ╱      ╲  ╱      ╲
+  0 ┼────┬────┴──┬────┴──┬────┴─────▶ t
+     -3π/2  -π/2  π/2  3π/2
+         |◄─ T = π ─▶|</div>
+        </div>
+
+        <!-- Q1 Visualizer -->
+        <div class="visualizer-container">
+          <div class="vis-header">
+            <span class="vis-title">📊 Interactive Wave Reconstruction</span>
+            <span class="vis-subtitle">Observe how adding complex terms (N) reconstructs the full-wave cosine lobes</span>
+          </div>
+          <div class="vis-body">
+            <canvas id="canvas-q1" class="vis-canvas"></canvas>
+          </div>
+          <div class="vis-controls">
+            <div class="control-group">
+              <label for="slider-q1-N">Harmonics (N): <span id="val-q1-N" class="mono">3</span></label>
+              <input type="range" id="slider-q1-N" min="0" max="8" value="3" class="vis-slider">
+            </div>
+          </div>
+        </div>
+
+        <div class="card formula">
+          <div class="card-label"><span class="dot"></span> Key Setup</div>
+          <div class="math-block">
+            $$ T = \pi \qquad \omega_0 = \frac{2\pi}{T} = 2\;\text{rad/s} $$
+            $$ C_k = \frac{1}{T}\int_{-T/2}^{T/2} x(t)\,e^{-jk\omega_0 t}\,dt = \frac{1}{\pi}\int_{-\pi/2}^{\pi/2}\cos(t)\,e^{-j2kt}\,dt $$
+          </div>
+        </div>
+
+        <!-- Steps -->
+        <div class="steps-container">
+          <div class="step">
+            <div class="step-number">1</div>
+            <div class="step-content">
+              <div class="step-title">Expand cos(t) via Euler's formula</div>
+              <p>Replace \(\cos(t)\) with its complex exponential form so we can combine exponents:</p>
+              <div class="math-block">
+                $$ \cos(t) = \frac{e^{jt} + e^{-jt}}{2} $$
+              </div>
+              <p>Substituting into the \(C_k\) integral:</p>
+              <div class="math-block">
+                $$ C_k = \frac{1}{2\pi}\int_{-\pi/2}^{\pi/2}\left[e^{j(1-2k)t} + e^{-j(1+2k)t}\right]dt $$
+              </div>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-number">2</div>
+            <div class="step-content">
+              <div class="step-title">Evaluate each integral</div>
+              <p>Both integrals have the same form \(\int_{-\pi/2}^{\pi/2} e^{j\alpha t}\,dt = \frac{2\sin(\alpha\pi/2)}{\alpha}\). So:</p>
+              <div class="math-block">
+                $$ I_1 = \frac{2\sin\!\big((1-2k)\tfrac{\pi}{2}\big)}{1-2k} \qquad I_2 = \frac{2\sin\!\big((1+2k)\tfrac{\pi}{2}\big)}{1+2k} $$
+              </div>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-number">3</div>
+            <div class="step-content">
+              <div class="step-title">Simplify the sines</div>
+              <p>Since \(1 \pm 2k\) is always odd, \(\sin\!\big((1\pm 2k)\frac{\pi}{2}\big) = (-1)^k\). This is because the sine of an odd multiple of \(\pi/2\) alternates \(\pm 1\).</p>
+              <div class="math-block">
+                $$ C_k = \frac{1}{2\pi}\left[\frac{2(-1)^k}{1-2k} + \frac{2(-1)^k}{1+2k}\right] = \frac{(-1)^k}{\pi}\left[\frac{1}{1-2k}+\frac{1}{1+2k}\right] $$
+              </div>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-number">4</div>
+            <div class="step-content">
+              <div class="step-title">Combine the fractions</div>
+              <p>Add the two fractions with a common denominator:</p>
+              <div class="math-block">
+                $$ \frac{1}{1-2k}+\frac{1}{1+2k} = \frac{(1+2k)+(1-2k)}{(1-2k)(1+2k)} = \frac{2}{1-4k^2} $$
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="final-answer">
+          <div class="final-answer-label">✦ Final Answer</div>
+          <div class="result">
+            $$ C_k = \frac{2(-1)^k}{\pi(1-4k^2)} $$
+          </div>
+          <div class="result">
+            $$ x(t) = \sum_{k=-\infty}^{\infty} \frac{2(-1)^k}{\pi(1-4k^2)}\;e^{j2kt} $$
+          </div>
+          <p class="note">for \(k = 0, \pm1, \pm2, \pm3, \ldots\)</p>
+        </div>
+
+        <div class="card">
+          <div class="card-label"><span class="dot" style="background:var(--accent)"></span> Numerical Values</div>
+          <table class="data-table">
+            <thead><tr><th>k</th><th>C_k expression</th><th>≈ Value</th></tr></thead>
+            <tbody>
+              <tr><td class="mono">0</td><td>\(\frac{2}{\pi}\)</td><td class="mono">0.637</td></tr>
+              <tr><td class="mono">±1</td><td>\(\frac{-2}{-3\pi} = \frac{2}{3\pi}\)</td><td class="mono">0.212</td></tr>
+              <tr><td class="mono">±2</td><td>\(\frac{2}{-15\pi}\)</td><td class="mono">−0.042</td></tr>
+              <tr><td class="mono">±3</td><td>\(\frac{-2}{-35\pi} = \frac{2}{35\pi}\)</td><td class="mono">0.018</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="card tip">
+          <div class="card-label"><span class="dot"></span> Writing Tips</div>
+          <ul class="check-list">
+            <li>Always state \(T\) and \(\omega_0\) before anything else</li>
+            <li>Expand \(\cos(t)\) with Euler — this is the key step examiners look for</li>
+            <li>Show \(\sin\!\big((1\pm2k)\frac\pi2\big)=(-1)^k\) explicitly</li>
+            <li>Verify: \(C_0 = 2/\pi\) is the DC (average) value — sanity check!</li>
+          </ul>
+        </div>
+      </div>
+
+
+      <!-- ════════════════════════════════════════
+           Q2/Q10 — Rectified Sine TFS
+           ════════════════════════════════════════ -->
+      <div id="q2" class="question-section">
+        <div class="page-header">
+          <div class="page-tag tfs">Trigonometric Fourier Series</div>
+          <h1 class="page-title">Q2/10 — Full-Wave Rectified Sine</h1>
+          <p class="page-subtitle">Find the TFS of \(x(t)=A|\sin(\pi f t)|\), a full-wave rectified sine with \(T=\pi\).</p>
+        </div>
+
+        <div class="card given">
+          <div class="card-label"><span class="dot"></span> Given Information</div>
+          <p>\(x(t) = A|\sin(t)|\), period \(T=\pi\), \(\omega_0 = 2\) rad/s.</p>
+          <div class="signal-diagram">
+  A │╲  ╱╲  ╱╲  ╱╲  ╱╲
+    │ ╲╱  ╲╱  ╲╱  ╲╱  ╲╱
+    │
+  0 ┼─┴───┴───┴───┴───┴──▶ t
+    0   π   2π  3π  4π
+    |◄ T=π ▶|</div>
+        </div>
+
+        <!-- Q2 Visualizer -->
+        <div class="visualizer-container">
+          <div class="vis-header">
+            <span class="vis-title">📊 Interactive TFS Reconstruction</span>
+            <span class="vis-subtitle">See how the summation of cosine harmonics builds the full-wave rectified sine</span>
+          </div>
+          <div class="vis-body">
+            <canvas id="canvas-q2" class="vis-canvas"></canvas>
+          </div>
+          <div class="vis-controls">
+            <div class="control-group">
+              <label for="slider-q2-N">Harmonics (N): <span id="val-q2-N" class="mono">3</span></label>
+              <input type="range" id="slider-q2-N" min="0" max="8" value="3" class="vis-slider">
+            </div>
+            <div class="control-group">
+              <label for="slider-q2-A">Amplitude (A): <span id="val-q2-A" class="mono">1.0</span></label>
+              <input type="range" id="slider-q2-A" min="0.5" max="2.0" step="0.1" value="1.0" class="vis-slider">
+            </div>
+          </div>
+        </div>
+
+        <div class="symmetry-note">
+          <h4>⚡ Symmetry Shortcut</h4>
+          <p>This signal is <strong>even</strong>: \(x(-t)=x(t)\).</p>
+          <ul>
+            <li>All \(b_n = 0\) — no sine terms needed</li>
+            <li>We only compute \(a_0\) and \(a_n\) — half the work!</li>
+          </ul>
+        </div>
+
+        <div class="steps-container">
+          <div class="step">
+            <div class="step-number">1</div>
+            <div class="step-content">
+              <div class="step-title">DC component \(a_0\)</div>
+              <p>The average value over one period:</p>
+              <div class="math-block">
+                $$ a_0 = \frac{1}{\pi}\int_0^{\pi}A\sin(t)\,dt = \frac{A}{\pi}\big[-\cos(t)\big]_0^{\pi} = \frac{A}{\pi}[1+1] = \frac{2A}{\pi} $$
+              </div>
+              <p>This makes sense — the average of a rectified sine is positive and about \(0.637A\).</p>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-number">2</div>
+            <div class="step-content">
+              <div class="step-title">Apply product-to-sum identity</div>
+              <p>For \(a_n\), we need \(\sin(t)\cos(2nt)\). Use the identity:</p>
+              <div class="math-highlight">
+                $$ \sin A\cos B = \tfrac{1}{2}\big[\sin(A+B)+\sin(A-B)\big] $$
+              </div>
+              <div class="math-block">
+                $$ a_n = \frac{2A}{\pi}\cdot\frac{1}{2}\int_0^{\pi}\big[\sin\!\big((1{+}2n)t\big)+\sin\!\big((1{-}2n)t\big)\big]\,dt $$
+              </div>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-number">3</div>
+            <div class="step-content">
+              <div class="step-title">Evaluate & combine</div>
+              <p>Since \(1\pm 2n\) are odd integers, \(\cos\!\big((1\pm 2n)\pi\big)=-1\), so each integral gives \(\frac{2}{1\pm 2n}\). Combining:</p>
+              <div class="math-block">
+                $$ a_n = \frac{A}{\pi}\left[\frac{2}{1+2n}+\frac{2}{1-2n}\right] = \frac{2A}{\pi}\cdot\frac{2}{1-4n^2} = \frac{-4A}{\pi(4n^2-1)} $$
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="final-answer">
+          <div class="final-answer-label">✦ Final Answer</div>
+          <div class="result">
+            $$ x(t) = \frac{2A}{\pi} + \sum_{n=1}^{\infty}\frac{-4A}{\pi(4n^2-1)}\cos(2nt) $$
+          </div>
+          <div class="result">
+            $$ = \frac{2A}{\pi} - \frac{4A}{\pi}\left[\frac{\cos 2t}{3}+\frac{\cos 4t}{15}+\frac{\cos 6t}{35}+\cdots\right] $$
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-label"><span class="dot" style="background:var(--accent)"></span> Coefficient Table (A = 1)</div>
+          <table class="data-table">
+            <thead><tr><th>n</th><th>4n²−1</th><th>aₙ</th><th>≈ Value</th></tr></thead>
+            <tbody>
+              <tr><td class="mono">DC</td><td>—</td><td>\(2/\pi\)</td><td class="mono">0.637</td></tr>
+              <tr><td class="mono">1</td><td>3</td><td>\(-4/(3\pi)\)</td><td class="mono">−0.424</td></tr>
+              <tr><td class="mono">2</td><td>15</td><td>\(-4/(15\pi)\)</td><td class="mono">−0.085</td></tr>
+              <tr><td class="mono">3</td><td>35</td><td>\(-4/(35\pi)\)</td><td class="mono">−0.036</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="card tip">
+          <div class="card-label"><span class="dot"></span> Key Insight</div>
+          <p>The rectified sine has period \(T=\pi\) (half the original sine period), so the fundamental frequency <em>doubles</em> to \(\omega_0=2\). The harmonics are at \(2\omega, 4\omega, 6\omega,\ldots\) — all even multiples of the original sine frequency.</p>
+        </div>
+      </div>
+
+
+      <!-- ════════════════════════════════════════
+           Q3 — Square Wave TFS
+           ════════════════════════════════════════ -->
+      <div id="q3" class="question-section">
+        <div class="page-header">
+          <div class="page-tag tfs">Trigonometric Fourier Series</div>
+          <h1 class="page-title">Q3 — Periodic Square Wave</h1>
+          <p class="page-subtitle">\(x(t)=+1\) for \(0\le t&lt;2\), \(x(t)=-1\) for \(2\le t&lt;4\). Period \(T=4\).</p>
+        </div>
+
+        <div class="card given">
+          <div class="card-label"><span class="dot"></span> Given Information</div>
+          <p>Period \(T=4\), fundamental frequency \(\omega_0 = \pi/2\) rad/s.</p>
+          <div class="signal-diagram">
++1 │ ████████          ████████
+   │         │         │
+   │         │         │
+−1 │         ████████          ████████
+   ┼────┬────┬────┬────┬────┬────▶ t
+        0    2    4    6    8</div>
+        </div>
+
+        <!-- Q3 Visualizer -->
+        <div class="visualizer-container">
+          <div class="vis-header">
+            <span class="vis-title">📊 Harmonic Synthesis & Gibbs Phenomenon</span>
+            <span class="vis-subtitle">Observe how adding individual sine harmonics constructs a square wave</span>
+          </div>
+          <div class="vis-body">
+            <canvas id="canvas-q3" class="vis-canvas"></canvas>
+          </div>
+          <div class="vis-controls">
+            <div class="control-group">
+              <label for="slider-q3-N">Number of Harmonics (N): <span id="val-q3-N" class="mono">3</span></label>
+              <input type="range" id="slider-q3-N" min="1" max="15" value="3" class="vis-slider">
+            </div>
+            <label class="vis-checkbox-label">
+              <input type="checkbox" id="chk-q3-showHarmonics" checked class="vis-checkbox">
+              Show Components
+            </label>
+          </div>
+        </div>
+
+        <div class="symmetry-note">
+          <h4>⚡ Symmetry Shortcut</h4>
+          <p>This signal is <strong>odd</strong>: \(x(-t)=-x(t)\).</p>
+          <ul>
+            <li>\(a_0 = 0\) — no DC component (equal positive and negative areas)</li>
+            <li>\(a_n = 0\) — no cosine terms at all</li>
+            <li>Only \(b_n\) needs computing — that's just one integral!</li>
+          </ul>
+        </div>
+
+        <div class="steps-container">
+          <div class="step">
+            <div class="step-number">1</div>
+            <div class="step-content">
+              <div class="step-title">Set up \(b_n\) with split limits</div>
+              <p>The signal changes at \(t=2\), so split the integral:</p>
+              <div class="math-block">
+                $$ b_n = \frac{2}{4}\left[\int_0^2 (+1)\sin\!\left(\frac{n\pi t}{2}\right)dt + \int_2^4 (-1)\sin\!\left(\frac{n\pi t}{2}\right)dt\right] $$
+              </div>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-number">2</div>
+            <div class="step-content">
+              <div class="step-title">Evaluate each integral</div>
+              <div class="math-block">
+                $$ I_1 = \int_0^2 \sin\!\left(\frac{n\pi t}{2}\right)dt = \frac{2}{n\pi}\big[1-(-1)^n\big] $$
+                $$ I_2 = \int_2^4 \sin\!\left(\frac{n\pi t}{2}\right)dt = \frac{2}{n\pi}\big[(-1)^n - 1\big] = -I_1 $$
+              </div>
+              <p>Notice \(I_2 = -I_1\). This makes sense because the second half-period is the negative mirror.</p>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-number">3</div>
+            <div class="step-content">
+              <div class="step-title">Combine: \(b_n = \frac12[I_1 - I_2] = \frac12[2I_1]\)</div>
+              <div class="math-block">
+                $$ b_n = \frac{2}{n\pi}\big[1-(-1)^n\big] $$
+              </div>
+              <p><strong>For odd \(n\):</strong> \((-1)^n = -1\), so \(b_n = \frac{4}{n\pi}\).</p>
+              <p><strong>For even \(n\):</strong> \((-1)^n = +1\), so \(b_n = 0\).</p>
+              <p>Only odd harmonics survive — this is a hallmark of square waves.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="final-answer">
+          <div class="final-answer-label">✦ Final Answer</div>
+          <div class="result">
+            $$ x(t) = \frac{4}{\pi}\sum_{\substack{n=1,3,5,\ldots}}^{\infty}\frac{1}{n}\sin\!\left(\frac{n\pi t}{2}\right) $$
+          </div>
+          <div class="result">
+            $$ = \frac{4}{\pi}\left[\sin\!\left(\frac{\pi t}{2}\right)+\frac{1}{3}\sin\!\left(\frac{3\pi t}{2}\right)+\frac{1}{5}\sin\!\left(\frac{5\pi t}{2}\right)+\cdots\right] $$
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-label"><span class="dot" style="background:var(--accent)"></span> Harmonic Amplitudes</div>
+          <table class="data-table">
+            <thead><tr><th>Harmonic n</th><th>bₙ</th><th>≈ Value</th><th>% of Fundamental</th></tr></thead>
+            <tbody>
+              <tr><td class="mono">1</td><td>\(4/\pi\)</td><td class="mono">1.273</td><td>100%</td></tr>
+              <tr><td class="mono">2</td><td>0</td><td class="mono">0</td><td>—</td></tr>
+              <tr><td class="mono">3</td><td>\(4/(3\pi)\)</td><td class="mono">0.424</td><td>33.3%</td></tr>
+              <tr><td class="mono">5</td><td>\(4/(5\pi)\)</td><td class="mono">0.255</td><td>20.0%</td></tr>
+              <tr><td class="mono">7</td><td>\(4/(7\pi)\)</td><td class="mono">0.182</td><td>14.3%</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="card warning">
+          <div class="card-label"><span class="dot"></span> Gibbs Phenomenon</div>
+          <p>At the jump discontinuities (\(t=0,2,4,\ldots\)), the Fourier series always <strong>overshoots by ≈9%</strong> of the jump height, no matter how many terms you include. This is an inherent limitation, not a computational error.</p>
+        </div>
+      </div>
+
+
+      <!-- ════════════════════════════════════════
+           Q4/Q13 — e^(-at)u(t) FT
+           ════════════════════════════════════════ -->
+      <div id="q4" class="question-section">
+        <div class="page-header">
+          <div class="page-tag ft">Fourier Transform</div>
+          <h1 class="page-title">Q4/13 — One-Sided Exponential</h1>
+          <p class="page-subtitle">Find the Fourier Transform, magnitude, and phase of \(x(t)=e^{-at}u(t)\), where \(a>0\).</p>
+        </div>
+
+        <div class="card given">
+          <div class="card-label"><span class="dot"></span> Given Information</div>
+          <p>\(x(t) = e^{-at}\,u(t)\) — an exponential that starts at \(t=0\) and decays with time constant \(1/a\).</p>
+          <ul>
+            <li>\(u(t)\) is the unit step function: equals 1 for \(t\ge 0\), equals 0 for \(t<0\)</li>
+            <li>\(a > 0\) ensures the signal dies out, which means the FT integral converges</li>
+          </ul>
+          <div class="signal-diagram">
+  1 │●╲
+    │  ╲╲
+    │    ╲╲___
+    │       ╲╲____
+  0 ┼─────────╲___________▶ t
+              0
+         time constant = 1/a</div>
+        </div>
+
+        <!-- Q4 Visualizer -->
+        <div class="visualizer-container">
+          <div class="vis-header">
+            <span class="vis-title">📊 Time-Frequency Uncertainty Viewer</span>
+            <span class="vis-subtitle">Time Domain x(t) = e⁻ᵃᵗu(t) [left] vs Frequency Domain |X(ω)| = 1/√(a² + ω²) [right]</span>
+          </div>
+          <div class="vis-body">
+            <canvas id="canvas-q4-time" class="vis-canvas half-width"></canvas>
+            <canvas id="canvas-q4-freq" class="vis-canvas half-width"></canvas>
+          </div>
+          <div class="vis-controls">
+            <div class="control-group">
+              <label for="slider-q4-a">Decay Rate (a): <span id="val-q4-a" class="mono">1.0</span></label>
+              <input type="range" id="slider-q4-a" min="0.2" max="3.0" step="0.1" value="1.0" class="vis-slider">
+            </div>
+          </div>
+        </div>
+
+        <div class="steps-container">
+          <div class="step">
+            <div class="step-number">1</div>
+            <div class="step-content">
+              <div class="step-title">Apply the FT definition</div>
+              <p>Since \(u(t)=0\) for \(t<0\), the lower limit effectively becomes 0:</p>
+              <div class="math-block">
+                $$ X(\omega) = \int_0^{\infty} e^{-at}\cdot e^{-j\omega t}\,dt = \int_0^{\infty} e^{-(a+j\omega)t}\,dt $$
+              </div>
+              <p>The two exponentials combine into one — this is why Euler's form is so powerful.</p>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-number">2</div>
+            <div class="step-content">
+              <div class="step-title">Evaluate the standard exponential integral</div>
+              <div class="math-block">
+                $$ \int_0^{\infty}e^{-\alpha t}\,dt = \frac{1}{\alpha} \quad\text{when Re}(\alpha)>0 $$
+              </div>
+              <p>Here \(\alpha = a + j\omega\), and \(\text{Re}(\alpha) = a > 0\) ✓, so it converges.</p>
+              <div class="math-block">
+                $$ X(\omega) = \left[\frac{e^{-(a+j\omega)t}}{-(a+j\omega)}\right]_0^{\infty} = \frac{0 - 1}{-(a+j\omega)} = \frac{1}{a+j\omega} $$
+              </div>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-number">3</div>
+            <div class="step-content">
+              <div class="step-title">Magnitude spectrum</div>
+              <p>For a complex number in the denominator, \(|1/(a{+}j\omega)| = 1/|a{+}j\omega|\):</p>
+              <div class="math-block">
+                $$ |X(\omega)| = \frac{1}{\sqrt{a^2+\omega^2}} $$
+              </div>
+              <p>This is a <strong>Lorentzian-shaped</strong> curve, peaked at \(\omega=0\) with value \(1/a\), and the −3 dB bandwidth is at \(\omega = \pm a\).</p>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-number">4</div>
+            <div class="step-content">
+              <div class="step-title">Phase spectrum</div>
+              <p>The phase of \(1/(a{+}j\omega)\) is the negative of the phase of the denominator:</p>
+              <div class="math-block">
+                $$ \angle X(\omega) = -\tan^{-1}\!\left(\frac{\omega}{a}\right) $$
+              </div>
+              <p>Phase goes from \(+\pi/2\) at \(\omega\to -\infty\) through 0 at \(\omega=0\) to \(-\pi/2\) at \(\omega\to +\infty\).</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="final-answer">
+          <div class="final-answer-label">✦ Final Answer</div>
+          <div class="result">
+            $$ X(\omega) = \frac{1}{a+j\omega} $$
+          </div>
+          <div class="result">
+            $$ |X(\omega)| = \frac{1}{\sqrt{a^2+\omega^2}} \qquad \angle X(\omega) = -\tan^{-1}\!\left(\frac{\omega}{a}\right) $$
+          </div>
+        </div>
+
+        <div class="card insight">
+          <div class="card-label"><span class="dot"></span> Physical Intuition</div>
+          <p><strong>Faster decay → wider spectrum.</strong> A large \(a\) means the signal dies quickly in time, so its energy is spread across a wider range of frequencies. A small \(a\) means a slowly decaying signal that concentrates energy near DC (\(\omega\approx 0\)).</p>
+          <p style="margin-top:8px;">This is the <strong>time-frequency uncertainty principle</strong> in action: you can't be narrow in both time and frequency.</p>
+        </div>
+      </div>
+
+
+      <!-- ════════════════════════════════════════
+           Q5/Q14/Q17 — e^(-|t|) FT
+           ════════════════════════════════════════ -->
+      <div id="q5" class="question-section">
+        <div class="page-header">
+          <div class="page-tag ft">Fourier Transform</div>
+          <h1 class="page-title">Q5/14/17 — Double-Sided Exponential</h1>
+          <p class="page-subtitle">Find the FT of \(x(t)=e^{-a|t|}\) (with \(a>0\), often \(a=1\)).</p>
+        </div>
+
+        <div class="card given">
+          <div class="card-label"><span class="dot"></span> Given Information</div>
+          <p>\(x(t) = e^{-a|t|}\) — an exponential decaying in <em>both</em> directions from a peak at \(t=0\).</p>
+          <div class="signal-diagram">
+         ___
+        ╱   ╲          peak = 1 at t = 0
+       ╱     ╲
+  ____╱       ╲____    decays as e^(-a|t|)
+─────┼─────────┼─────▶ t
+              0
+  symmetric about t = 0 (even function)</div>
+        </div>
+
+        <!-- Q5 Visualizer -->
+        <div class="visualizer-container">
+          <div class="vis-header">
+            <span class="vis-title">📊 Bilateral Decay Fourier Transform</span>
+            <span class="vis-subtitle">Time Domain x(t) = e⁻ᵃˡᵗˡ [left] vs Frequency Domain |X(ω)| = 2a/(a² + ω²) [right]</span>
+          </div>
+          <div class="vis-body">
+            <canvas id="canvas-q5-time" class="vis-canvas half-width"></canvas>
+            <canvas id="canvas-q5-freq" class="vis-canvas half-width"></canvas>
+          </div>
+          <div class="vis-controls">
+            <div class="control-group">
+              <label for="slider-q5-a">Decay Rate (a): <span id="val-q5-a" class="mono">1.0</span></label>
+              <input type="range" id="slider-q5-a" min="0.2" max="3.0" step="0.1" value="1.0" class="vis-slider">
+            </div>
+          </div>
+        </div>
+
+        <div class="symmetry-note">
+          <h4>⚡ Symmetry Shortcut</h4>
+          <p>This is an <strong>even function</strong> (\(e^{-a|t|} = e^{-a|-t|}\)), so its Fourier Transform is <strong>purely real</strong> — no imaginary part, and the phase is either 0 or \(\pi\).</p>
+        </div>
+
+        <div class="steps-container">
+          <div class="step">
+            <div class="step-number">1</div>
+            <div class="step-content">
+              <div class="step-title">Split the absolute value</div>
+              <p>The absolute value means different behavior for \(t<0\) and \(t>0\):</p>
+              <div class="math-block">
+                $$ X(\omega) = \int_{-\infty}^{0}e^{at}\cdot e^{-j\omega t}\,dt + \int_{0}^{\infty}e^{-at}\cdot e^{-j\omega t}\,dt $$
+              </div>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-number">2</div>
+            <div class="step-content">
+              <div class="step-title">Evaluate each half</div>
+              <div class="math-block">
+                $$ \text{Left half: } \int_{-\infty}^{0}e^{(a-j\omega)t}\,dt = \frac{1}{a-j\omega} $$
+                $$ \text{Right half: } \int_0^{\infty}e^{-(a+j\omega)t}\,dt = \frac{1}{a+j\omega} $$
+              </div>
+              <p>Each half is just the one-sided exponential FT from Q4, but mirrored!</p>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-number">3</div>
+            <div class="step-content">
+              <div class="step-title">Add the two halves</div>
+              <div class="math-block">
+                $$ X(\omega) = \frac{1}{a-j\omega}+\frac{1}{a+j\omega} = \frac{(a+j\omega)+(a-j\omega)}{(a-j\omega)(a+j\omega)} = \frac{2a}{a^2+\omega^2} $$
+              </div>
+              <p>The \(j\omega\) terms cancel perfectly, leaving a purely real result. This confirms the even-symmetry prediction.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="final-answer">
+          <div class="final-answer-label">✦ Final Answer</div>
+          <div class="result">
+            $$ X(\omega) = \frac{2a}{a^2+\omega^2} $$
+          </div>
+          <div class="result">
+            $$ \text{For }a=1: \quad X(\omega) = \frac{2}{1+\omega^2} $$
+          </div>
+          <p class="note">Magnitude = \(\frac{2a}{a^2+\omega^2}\), Phase = 0 for all \(\omega\) (purely real and positive).</p>
+        </div>
+
+        <div class="card insight">
+          <div class="card-label"><span class="dot"></span> Connection to Q4</div>
+          <p>Notice how \(e^{-a|t|}\) is just two copies of \(e^{-at}u(t)\) placed back-to-back. Its FT is literally the sum of the Q4 result and its time-reversed version. This is the <strong>linearity + time-reversal</strong> property at work.</p>
+        </div>
+      </div>
+
+
+      <!-- ════════════════════════════════════════
+           Q6/Q16 — cos(Ω₀t) FT
+           ════════════════════════════════════════ -->
+      <div id="q6" class="question-section">
+        <div class="page-header">
+          <div class="page-tag ft">Fourier Transform</div>
+          <h1 class="page-title">Q6/16 — FT of cos(Ω₀t)</h1>
+          <p class="page-subtitle">Find the Fourier Transform of a pure cosine \(x(t) = \cos(\Omega_0 t)\).</p>
+        </div>
+
+        <div class="card given">
+          <div class="card-label"><span class="dot"></span> Given Information</div>
+          <p>\(x(t) = \cos(\Omega_0 t)\) — a pure sinusoid lasting from \(-\infty\) to \(+\infty\).</p>
+          <p>This signal has <strong>infinite energy</strong> (it never dies out), so the FT doesn't converge in the ordinary sense. We need <strong>impulse functions</strong> (Dirac deltas).</p>
+        </div>
+
+        <!-- Q6 Visualizer -->
+        <div class="visualizer-container">
+          <div class="vis-header">
+            <span class="vis-title">📊 Pure Sinusoid & Spectral Spikes</span>
+            <span class="vis-subtitle">Time Domain x(t) = cos(Ω₀t) [left] vs Frequency Domain X(ω) = π[δ(ω - Ω₀) + δ(ω + Ω₀)] [right]</span>
+          </div>
+          <div class="vis-body">
+            <canvas id="canvas-q6-time" class="vis-canvas half-width"></canvas>
+            <canvas id="canvas-q6-freq" class="vis-canvas half-width"></canvas>
+          </div>
+          <div class="vis-controls">
+            <div class="control-group">
+              <label for="slider-q6-w">Frequency (Ω₀): <span id="val-q6-w" class="mono">2.5</span> rad/s</label>
+              <input type="range" id="slider-q6-w" min="1.0" max="8.0" step="0.1" value="2.5" class="vis-slider">
+            </div>
+          </div>
+        </div>
+
+        <div class="steps-container">
+          <div class="step">
+            <div class="step-number">1</div>
+            <div class="step-content">
+              <div class="step-title">Start from the known FT of a delta</div>
+              <p>We know the inverse FT pair:</p>
+              <div class="math-highlight">
+                $$ \mathcal{F}\{1\} = 2\pi\,\delta(\omega) \quad\Longleftrightarrow\quad \mathcal{F}^{-1}\{2\pi\,\delta(\omega-\Omega_0)\} = e^{j\Omega_0 t} $$
+              </div>
+              <p>This tells us: \(\mathcal{F}\{e^{j\Omega_0 t}\} = 2\pi\,\delta(\omega - \Omega_0)\).</p>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-number">2</div>
+            <div class="step-content">
+              <div class="step-title">Express cosine via Euler's formula</div>
+              <div class="math-block">
+                $$ \cos(\Omega_0 t) = \frac{e^{j\Omega_0 t}+e^{-j\Omega_0 t}}{2} $$
+              </div>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-number">3</div>
+            <div class="step-content">
+              <div class="step-title">Apply linearity of FT</div>
+              <div class="math-block">
+                $$ X(\omega) = \frac{1}{2}\cdot 2\pi\,\delta(\omega-\Omega_0) + \frac{1}{2}\cdot 2\pi\,\delta(\omega+\Omega_0) $$
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="final-answer">
+          <div class="final-answer-label">✦ Final Answer</div>
+          <div class="result">
+            $$ X(\omega) = \pi\big[\delta(\omega-\Omega_0)+\delta(\omega+\Omega_0)\big] $$
+          </div>
+          <p class="note">Two impulses of strength \(\pi\), located at \(\omega = \pm\Omega_0\).</p>
+        </div>
+
+        <div class="card">
+          <div class="card-label"><span class="dot" style="background:var(--accent)"></span> Spectrum Sketch</div>
+          <div class="signal-diagram">
+     X(ω)
+       │
+    π  │    ↑                    ↑
+       │    │                    │
+       │    │                    │
+   ────┼────┼────────────────────┼────▶ ω
+      -Ω₀   0                  +Ω₀
+
+   Two delta spikes of height π at ±Ω₀
+   Phase = 0 (both are real and positive)</div>
+        </div>
+
+        <div class="card insight">
+          <div class="card-label"><span class="dot"></span> Why This Matters</div>
+          <p>A pure cosine contains energy at <strong>exactly one frequency</strong> (plus its negative mirror). The Dirac deltas are the mathematical way to say "all the energy is concentrated at a single point in the frequency axis." This is the foundation of spectral analysis — real signals are combinations of these pure tones.</p>
+        </div>
+
+        <div class="card tip">
+          <div class="card-label"><span class="dot"></span> Related Results</div>
+          <table class="data-table">
+            <thead><tr><th>Signal</th><th>Fourier Transform</th></tr></thead>
+            <tbody>
+              <tr><td>\(\cos(\Omega_0 t)\)</td><td>\(\pi[\delta(\omega-\Omega_0)+\delta(\omega+\Omega_0)]\)</td></tr>
+              <tr><td>\(\sin(\Omega_0 t)\)</td><td>\(j\pi[\delta(\omega+\Omega_0)-\delta(\omega-\Omega_0)]\)</td></tr>
+              <tr><td>\(e^{j\Omega_0 t}\)</td><td>\(2\pi\,\delta(\omega-\Omega_0)\)</td></tr>
+              <tr><td>\(1\) (DC)</td><td>\(2\pi\,\delta(\omega)\)</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+
+      <!-- ════════════════════════════════════════
+           Q7 — TFS vs EFS Methods
+           ════════════════════════════════════════ -->
+      <div id="q7" class="question-section">
+        <div class="page-header">
+          <div class="page-tag theory">Theory</div>
+          <h1 class="page-title">Q7 — TFS vs EFS Methods</h1>
+          <p class="page-subtitle">Compare the Trigonometric and Exponential Fourier Series representations.</p>
+        </div>
+
+        <div class="card given">
+          <div class="card-label"><span class="dot"></span> The Two Representations</div>
+          <div class="math-block">
+            $$ \textbf{TFS: } x(t) = a_0 + \sum_{n=1}^{\infty}\big[a_n\cos(n\omega_0 t)+b_n\sin(n\omega_0 t)\big] $$
+            $$ \textbf{EFS: } x(t) = \sum_{k=-\infty}^{\infty}C_k\,e^{jk\omega_0 t} $$
+          </div>
+          <p>Both are mathematically equivalent — they're just different ways of writing the same decomposition.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-label"><span class="dot" style="background:var(--accent)"></span> Side-by-Side Comparison</div>
+          <table class="data-table">
+            <thead><tr><th>Feature</th><th>TFS (Trigonometric)</th><th>EFS (Exponential)</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Basis functions</strong></td><td>\(\cos(n\omega_0 t),\;\sin(n\omega_0 t)\)</td><td>\(e^{jk\omega_0 t}\)</td></tr>
+              <tr><td><strong>Summation range</strong></td><td>\(n = 0, 1, 2, \ldots\) (one-sided)</td><td>\(k = -\infty \text{ to } +\infty\) (two-sided)</td></tr>
+              <tr><td><strong>Coefficients</strong></td><td>Real: \(a_0, a_n, b_n\) (three sets)</td><td>Complex: \(C_k\) (one set)</td></tr>
+              <tr><td><strong>Coefficient count</strong></td><td>3 integrals per harmonic</td><td>1 integral per harmonic</td></tr>
+              <tr><td><strong>Physical meaning</strong></td><td>Directly shows amplitude of sine/cosine components</td><td>Shows magnitude & phase in compact form</td></tr>
+              <tr><td><strong>Symmetry benefits</strong></td><td>Even → \(b_n{=}0\); Odd → \(a_n{=}0\)</td><td>Real signal → \(C_{-k}=C_k^*\)</td></tr>
+              <tr><td><strong>Best for</strong></td><td>Exam problems, physical intuition</td><td>Analysis, compact notation, FT connection</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="card formula">
+          <div class="card-label"><span class="dot"></span> Conversion Between Forms</div>
+          <p>You can always convert between TFS and EFS coefficients:</p>
+          <div class="math-block">
+            $$ C_0 = a_0 \qquad C_k = \frac{a_k - jb_k}{2}\;(k>0) \qquad C_{-k} = \frac{a_k + jb_k}{2} = C_k^* $$
+          </div>
+          <p>And in reverse:</p>
+          <div class="math-block">
+            $$ a_0 = C_0 \qquad a_n = 2\,\text{Re}(C_n) \qquad b_n = -2\,\text{Im}(C_n) $$
+          </div>
+        </div>
+
+        <div class="card tip">
+          <div class="card-label"><span class="dot"></span> When to Use Which</div>
+          <ul>
+            <li><strong>Use TFS</strong> when the problem asks for "Trigonometric FS" or when you want to quickly identify which harmonics (cosine vs sine) are present.</li>
+            <li><strong>Use EFS</strong> when the problem asks for "Exponential FS", when the algebra is simpler with complex exponentials, or when you need to connect to the Fourier Transform.</li>
+            <li>If no form is specified, EFS often involves less algebra since you solve one integral instead of two.</li>
+          </ul>
+        </div>
+
+        <div class="card insight">
+          <div class="card-label"><span class="dot"></span> The Deep Connection</div>
+          <p>The EFS is the <strong>bridge to the Fourier Transform</strong>. As the period \(T\to\infty\), the discrete spectrum \(C_k\) at harmonics \(k\omega_0\) transitions into the continuous spectrum \(X(\omega)\). The spacing between harmonics, \(\omega_0 = 2\pi/T\), shrinks to zero, and the sum becomes an integral. This is how the FT naturally extends the FS to non-periodic signals.</p>
+        </div>
+      </div>
+
+
+      <!-- ════════════════════════════════════════
+           Q8/Q15 — Gate Function FT
+           ════════════════════════════════════════ -->
+      <div id="q8" class="question-section">
+        <div class="page-header">
+          <div class="page-tag ft">Fourier Transform</div>
+          <h1 class="page-title">Q8/15 — Gate (Rectangular Pulse)</h1>
+          <p class="page-subtitle">Find the FT of the gate function \(x(t) = \text{rect}(t/\tau)\) — a pulse of width \(\tau\) centered at \(t=0\).</p>
+        </div>
+
+        <div class="card given">
+          <div class="card-label"><span class="dot"></span> Given Information</div>
+          <p>\(x(t) = 1\) for \(|t| \le \tau/2\), \(x(t) = 0\) otherwise. Total width = \(\tau\).</p>
+          <div class="signal-diagram">
+  1 │    ┌──────────┐
+    │    │          │
+    │    │   τ      │
+  0 ┼────┘──────────└──────▶ t
+       −τ/2   0   τ/2
+
+  A rectangular pulse of height 1, width τ</div>
+        </div>
+
+        <!-- Q8 Visualizer -->
+        <div class="visualizer-container">
+          <div class="vis-header">
+            <span class="vis-title">📊 Gate / Rect Pulse ↔ Sinc Spectral Duality</span>
+            <span class="vis-subtitle">Time Domain x(t) = rect(t/τ) [left] vs Frequency Domain |X(ω)| = τ|sinc(ωτ/2)| [right]</span>
+          </div>
+          <div class="vis-body">
+            <canvas id="canvas-q8-time" class="vis-canvas half-width"></canvas>
+            <canvas id="canvas-q8-freq" class="vis-canvas half-width"></canvas>
+          </div>
+          <div class="vis-controls">
+            <div class="control-group">
+              <label for="slider-q8-tau">Pulse Width (τ): <span id="val-q8-tau" class="mono">1.5</span> s</label>
+              <input type="range" id="slider-q8-tau" min="0.4" max="4.0" step="0.1" value="1.5" class="vis-slider">
+            </div>
+          </div>
+        </div>
+
+        <div class="symmetry-note">
+          <h4>⚡ Symmetry Shortcut</h4>
+          <p>The gate function is <strong>even</strong> and <strong>real</strong>, so \(X(\omega)\) is also purely real and even.</p>
+        </div>
+
+        <div class="steps-container">
+          <div class="step">
+            <div class="step-number">1</div>
+            <div class="step-content">
+              <div class="step-title">Apply the FT definition</div>
+              <p>Since \(x(t)=1\) only on \([-\tau/2, \tau/2]\):</p>
+              <div class="math-block">
+                $$ X(\omega) = \int_{-\tau/2}^{\tau/2} 1\cdot e^{-j\omega t}\,dt = \left[\frac{e^{-j\omega t}}{-j\omega}\right]_{-\tau/2}^{\tau/2} $$
+              </div>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-number">2</div>
+            <div class="step-content">
+              <div class="step-title">Evaluate the limits</div>
+              <div class="math-block">
+                $$ X(\omega) = \frac{e^{-j\omega\tau/2}-e^{j\omega\tau/2}}{-j\omega} = \frac{2\sin(\omega\tau/2)}{\omega} $$
+              </div>
+              <p>We used \(e^{j\theta}-e^{-j\theta}=2j\sin\theta\) to simplify.</p>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-number">3</div>
+            <div class="step-content">
+              <div class="step-title">Write in sinc form</div>
+              <p>Multiply and divide by \(\tau/2\):</p>
+              <div class="math-block">
+                $$ X(\omega) = \tau\cdot\frac{\sin(\omega\tau/2)}{\omega\tau/2} = \tau\,\text{sinc}\!\left(\frac{\omega\tau}{2}\right) $$
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="final-answer">
+          <div class="final-answer-label">✦ Final Answer</div>
+          <div class="result">
+            $$ X(\omega) = \tau\,\text{sinc}\!\left(\frac{\omega\tau}{2}\right) = \frac{2\sin(\omega\tau/2)}{\omega} $$
+          </div>
+          <p class="note">Peak value at \(\omega=0\) is \(X(0)=\tau\). First zero at \(\omega = \pm 2\pi/\tau\).</p>
+        </div>
+
+        <div class="card">
+          <div class="card-label"><span class="dot" style="background:var(--accent)"></span> Spectrum Sketch</div>
+          <div class="signal-diagram">
+ X(ω)
+  τ ─│─────╱╲
+    │    ╱    ╲
+    │   ╱      ╲
+    │  ╱   main  ╲        sidelobes
+    │ ╱    lobe    ╲  ╱╲       ╱╲
+  0 ┼╱──────────────╲╱──╲─────╱──╲──▶ ω
+    │              2π/τ   4π/τ
+    │
+   The sinc function: main lobe + decaying sidelobes</div>
+        </div>
+
+        <div class="card insight">
+          <div class="card-label"><span class="dot"></span> The Gate ↔ Sinc Duality</div>
+          <p>This is one of the most important FT pairs in all of signal processing:</p>
+          <ul>
+            <li><strong>Narrow pulse</strong> (small \(\tau\)) → <strong>wide spectrum</strong> (main lobe stretches out)</li>
+            <li><strong>Wide pulse</strong> (large \(\tau\)) → <strong>narrow spectrum</strong> (energy concentrates near DC)</li>
+          </ul>
+          <p style="margin-top:8px;">In the limit: an infinitely narrow pulse (Dirac delta) has a flat, infinite spectrum — it contains <em>all</em> frequencies equally.</p>
+        </div>
+      </div>
+
+
+      <!-- ════════════════════════════════════════
+           Q9/Q11 — Triangular Wave
+           ════════════════════════════════════════ -->
+      <div id="q9" class="question-section">
+        <div class="page-header">
+          <div class="page-tag efs">Exponential Fourier Series</div>
+          <h1 class="page-title">Q9/11 — Triangular Wave</h1>
+          <p class="page-subtitle">Find the EFS of a triangular wave with period \(T=2\).</p>
+        </div>
+
+        <div class="card given">
+          <div class="card-label"><span class="dot"></span> Given Information</div>
+          <p>\(x(t) = t\) for \(-1 \le t < 1\), repeating with \(T=2\), \(\omega_0 = \pi\) rad/s.</p>
+          <div class="signal-diagram">
++1 │      ╱│╲      ╱│╲
+   │    ╱  │  ╲  ╱  │  ╲
+ 0 ┼──╱────┼────╲────┼────╲──▶ t
+   │╱      │      ╲  │
+−1 │       │        ╲│
+       −1  0   1   2   3</div>
+        </div>
+
+        <!-- Q9 Visualizer -->
+        <div class="visualizer-container">
+          <div class="vis-header">
+            <span class="vis-title">📊 Sawtooth Wave EFS Reconstruction</span>
+            <span class="vis-subtitle">Observe how adding complex terms (N) reconstructs the periodic sawtooth wave</span>
+          </div>
+          <div class="vis-body">
+            <canvas id="canvas-q9" class="vis-canvas"></canvas>
+          </div>
+          <div class="vis-controls">
+            <div class="control-group">
+              <label for="slider-q9-N">Harmonics (N): <span id="val-q9-N" class="mono">3</span></label>
+              <input type="range" id="slider-q9-N" min="1" max="15" value="3" class="vis-slider">
+            </div>
+            <label class="vis-checkbox-label">
+              <input type="checkbox" id="chk-q9-showHarmonics" checked class="vis-checkbox">
+              Show Components
+            </label>
+          </div>
+        </div>
+
+        <div class="symmetry-note">
+          <h4>⚡ Symmetry Shortcut</h4>
+          <p>This is an <strong>odd function</strong> (\(x(-t)=-x(t)\)), so:</p>
+          <ul>
+            <li>\(C_0 = 0\) (no DC component)</li>
+            <li>\(C_k\) is purely imaginary</li>
+          </ul>
+        </div>
+
+        <div class="steps-container">
+          <div class="step">
+            <div class="step-number">1</div>
+            <div class="step-content">
+              <div class="step-title">Write the EFS coefficient formula</div>
+              <div class="math-block">
+                $$ C_k = \frac{1}{2}\int_{-1}^{1} t\,e^{-jk\pi t}\,dt $$
+              </div>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-number">2</div>
+            <div class="step-content">
+              <div class="step-title">Integration by parts</div>
+              <p>Let \(u=t\), \(dv=e^{-jk\pi t}dt\). Then \(du=dt\), \(v=\frac{e^{-jk\pi t}}{-jk\pi}\):</p>
+              <div class="math-block">
+                $$ C_k = \frac{1}{2}\left[\frac{t\,e^{-jk\pi t}}{-jk\pi}\bigg|_{-1}^{1} - \int_{-1}^{1}\frac{e^{-jk\pi t}}{-jk\pi}\,dt\right] $$
+              </div>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-number">3</div>
+            <div class="step-content">
+              <div class="step-title">Evaluate boundary terms and remaining integral</div>
+              <p><strong>Boundary term:</strong></p>
+              <div class="math-block">
+                $$ \frac{1}{-jk\pi}\big[e^{-jk\pi}-(-1)e^{jk\pi}\big] = \frac{1}{-jk\pi}\big[(-1)^k+(-1)^k\big] = \frac{2(-1)^k}{-jk\pi} $$
+              </div>
+              <p><strong>Remaining integral:</strong></p>
+              <div class="math-block">
+                $$ \frac{1}{jk\pi}\int_{-1}^{1}e^{-jk\pi t}\,dt = \frac{1}{jk\pi}\cdot\frac{2\sin(k\pi)}{k\pi} = 0 $$
+              </div>
+              <p>Since \(\sin(k\pi)=0\) for all integers \(k\), the remaining integral vanishes!</p>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-number">4</div>
+            <div class="step-content">
+              <div class="step-title">Simplify</div>
+              <div class="math-block">
+                $$ C_k = \frac{1}{2}\cdot\frac{2(-1)^k}{-jk\pi} = \frac{(-1)^k}{-jk\pi} = \frac{j(-1)^k}{k\pi} $$
+              </div>
+              <p>We used the identity \(\frac{1}{-j}=j\) to clean up the expression.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="final-answer">
+          <div class="final-answer-label">✦ Final Answer</div>
+          <div class="result">
+            $$ C_k = \frac{j(-1)^k}{k\pi} \quad (k\ne 0), \qquad C_0 = 0 $$
+          </div>
+          <div class="result">
+            $$ x(t) = \sum_{\substack{k=-\infty\\k\ne 0}}^{\infty}\frac{j(-1)^k}{k\pi}\,e^{jk\pi t} $$
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-label"><span class="dot" style="background:var(--accent)"></span> Magnitude Spectrum</div>
+          <table class="data-table">
+            <thead><tr><th>k</th><th>\(C_k\)</th><th>\(|C_k|\)</th><th>\(\angle C_k\)</th></tr></thead>
+            <tbody>
+              <tr><td class="mono">0</td><td>0</td><td>0</td><td>—</td></tr>
+              <tr><td class="mono">±1</td><td>\(\mp j/\pi\)</td><td>\(1/\pi \approx 0.318\)</td><td>\(\mp\pi/2\)</td></tr>
+              <tr><td class="mono">±2</td><td>\(\pm j/(2\pi)\)</td><td>\(1/(2\pi) \approx 0.159\)</td><td>\(\pm\pi/2\)</td></tr>
+              <tr><td class="mono">±3</td><td>\(\mp j/(3\pi)\)</td><td>\(1/(3\pi) \approx 0.106\)</td><td>\(\mp\pi/2\)</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="card insight">
+          <div class="card-label"><span class="dot"></span> Key Observation</div>
+          <p>The magnitude \(|C_k| = 1/(|k|\pi)\) decays as \(1/k\), which is the <strong>same rate</strong> as the square wave. Both have jump discontinuities. In general, smoother signals have spectra that decay faster — a triangular wave with no jumps would decay as \(1/k^2\).</p>
+        </div>
+      </div>
+
+
+      <!-- ════════════════════════════════════════
+           Q12 — FT Properties
+           ════════════════════════════════════════ -->
+      <div id="q12" class="question-section">
+        <div class="page-header">
+          <div class="page-tag theory">Theory</div>
+          <h1 class="page-title">Q12 — Fourier Transform Properties</h1>
+          <p class="page-subtitle">The 12 essential properties that make the FT so powerful.</p>
+        </div>
+
+        <div class="card given">
+          <div class="card-label"><span class="dot"></span> Setup</div>
+          <p>Assume \(x(t) \xleftrightarrow{\mathcal{F}} X(\omega)\) and \(y(t) \xleftrightarrow{\mathcal{F}} Y(\omega)\). These properties let you find transforms of modified signals <em>without re-doing the integral</em>.</p>
+        </div>
+
+        <div class="properties-grid">
+          <div class="property-card">
+            <h4><span class="prop-num">1</span> Linearity</h4>
+            <p>Scaling and addition in time → same in frequency.</p>
+            <div class="math-block">$$ ax(t)+by(t) \;\leftrightarrow\; aX(\omega)+bY(\omega) $$</div>
+          </div>
+
+          <div class="property-card">
+            <h4><span class="prop-num">2</span> Time Shifting</h4>
+            <p>A delay in time → phase rotation in frequency (magnitude unchanged).</p>
+            <div class="math-block">$$ x(t-t_0) \;\leftrightarrow\; e^{-j\omega t_0}X(\omega) $$</div>
+          </div>
+
+          <div class="property-card">
+            <h4><span class="prop-num">3</span> Frequency Shifting</h4>
+            <p>Multiplying by a complex exponential → shift in frequency.</p>
+            <div class="math-block">$$ e^{j\omega_0 t}x(t) \;\leftrightarrow\; X(\omega-\omega_0) $$</div>
+          </div>
+
+          <div class="property-card">
+            <h4><span class="prop-num">4</span> Time Scaling</h4>
+            <p>Compressing in time → expanding in frequency (and vice versa).</p>
+            <div class="math-block">$$ x(at) \;\leftrightarrow\; \frac{1}{|a|}X\!\left(\frac{\omega}{a}\right) $$</div>
+          </div>
+
+          <div class="property-card">
+            <h4><span class="prop-num">5</span> Time Reversal</h4>
+            <p>Flipping the signal in time → flipping the spectrum.</p>
+            <div class="math-block">$$ x(-t) \;\leftrightarrow\; X(-\omega) $$</div>
+          </div>
+
+          <div class="property-card">
+            <h4><span class="prop-num">6</span> Duality</h4>
+            <p>Swapping time and frequency roles.</p>
+            <div class="math-block">$$ X(t) \;\leftrightarrow\; 2\pi\,x(-\omega) $$</div>
+          </div>
+
+          <div class="property-card">
+            <h4><span class="prop-num">7</span> Differentiation in Time</h4>
+            <p>Each derivative brings out a factor of \(j\omega\).</p>
+            <div class="math-block">$$ \frac{d^n x(t)}{dt^n} \;\leftrightarrow\; (j\omega)^n X(\omega) $$</div>
+          </div>
+
+          <div class="property-card">
+            <h4><span class="prop-num">8</span> Integration</h4>
+            <p>Integration in time → division by \(j\omega\) (plus a DC term).</p>
+            <div class="math-block">$$ \int_{-\infty}^{t}x(\tau)\,d\tau \;\leftrightarrow\; \frac{X(\omega)}{j\omega}+\pi X(0)\delta(\omega) $$</div>
+          </div>
+
+          <div class="property-card">
+            <h4><span class="prop-num">9</span> Convolution in Time</h4>
+            <p>Convolution in time = multiplication in frequency. This is <em>the</em> reason we use the FT.</p>
+            <div class="math-block">$$ x(t)*y(t) \;\leftrightarrow\; X(\omega)\cdot Y(\omega) $$</div>
+          </div>
+
+          <div class="property-card">
+            <h4><span class="prop-num">10</span> Multiplication in Time</h4>
+            <p>Multiplication in time = convolution in frequency (÷ by \(2\pi\)).</p>
+            <div class="math-block">$$ x(t)\cdot y(t) \;\leftrightarrow\; \frac{1}{2\pi}X(\omega)*Y(\omega) $$</div>
+          </div>
+
+          <div class="property-card">
+            <h4><span class="prop-num">11</span> Parseval's Theorem</h4>
+            <p>Total energy is the same whether measured in time or frequency.</p>
+            <div class="math-block">$$ \int_{-\infty}^{\infty}|x(t)|^2\,dt = \frac{1}{2\pi}\int_{-\infty}^{\infty}|X(\omega)|^2\,d\omega $$</div>
+          </div>
+
+          <div class="property-card">
+            <h4><span class="prop-num">12</span> Conjugate Symmetry</h4>
+            <p>For real signals, the spectrum is conjugate-symmetric.</p>
+            <div class="math-block">$$ x(t)\text{ real} \;\Rightarrow\; X(-\omega)=X^*(\omega) $$</div>
+            <p style="margin-top:6px;font-size:12px;">Meaning: \(|X(-\omega)|=|X(\omega)|\), \(\angle X(-\omega)=-\angle X(\omega)\).</p>
+          </div>
+        </div>
+
+        <div class="card tip">
+          <div class="card-label"><span class="dot"></span> Most Tested Properties</div>
+          <ul>
+            <li><strong>Linearity + Time/Frequency Shift:</strong> Almost always used together in derivations</li>
+            <li><strong>Time-domain convolution:</strong> The #1 reason Fourier analysis exists in engineering</li>
+            <li><strong>Parseval's theorem:</strong> Used whenever energy calculations come up</li>
+            <li><strong>Duality:</strong> Lets you get "free" FT pairs from known ones</li>
+          </ul>
+        </div>
+      </div>
+
+    </div><!-- /content-wrapper -->
+  </main>
+
+</div><!-- /app -->
+
+<button class="scroll-top-btn" aria-label="Scroll to top">↑</button>
+
+<script src="script.js"></script>
+<script src="chatbot.js"></script>
+
+</body>
+</html>
